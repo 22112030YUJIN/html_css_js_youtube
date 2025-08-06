@@ -1,0 +1,164 @@
+.library-container {
+    padding: 16px;
+    color: white;
+}
+
+@media (min-width: 640px) {
+    .library-container {
+        padding: 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .library-container {
+        padding: 32px;
+    }
+}
+
+.library-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+    .library-title {
+        font-size: 30px;
+    }
+}
+
+.profile-card {
+    background-color: #212121;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-name {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.profile-email {
+    color: #a8a8a8;
+    font-size: 16px;
+}
+
+.channel-manage-btn {
+    margin-top: 8px;
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.channel-manage-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.history-section, .my-videos-section, .watch-later-section {
+    background-color: #212121;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.section-link {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.section-link:hover {
+    text-decoration: underline;
+}
+
+.section-empty-text {
+    color: #a8a8a8;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .video-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .video-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.video-item {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 144px;
+    object-fit: cover;
+}
+
+.video-details {
+    padding: 12px;
+}
+
+.video-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.video-channel, .video-metadata {
+    color: #a8a8a8;
+    font-size: 14px;
+}
+
+.video-metadata {
+    font-size: 12px;
+}

@@ -1,0 +1,111 @@
+.subscriptions-page {
+    padding: 16px;
+    color: white;
+}
+
+.subscriptions-page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.subscription-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+    .subscription-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .subscription-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .subscription-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .subscription-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+.subscription-channel-card {
+    background-color: #212121;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.subscription-channel-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+}
+
+.subscription-channel-name {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.subscription-channel-subscribers {
+    color: #a8a8a8;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.subscription-video-container {
+    width: 100%;
+}
+
+.subscription-video-card {
+    background-color: #212121;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.subscription-video-thumbnail {
+    width: 100%;
+    height: 144px;
+    object-fit: cover;
+}
+
+.subscription-video-info {
+    padding: 8px;
+}
+
+.subscription-video-title {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.subscription-video-meta {
+    color: #a8a8a8;
+    font-size: 12px;
+}
+
+.subscription-no-video {
+    color: #a8a8a8;
+    font-size: 12px;
+    text-align: center;
+    padding: 16px 0;
+}

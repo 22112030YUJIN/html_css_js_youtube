@@ -1,33 +1,26 @@
-// components/SubscriptionsPage.js
-import { channels, videos } from '../data/videos.js';
-import { VideoCard } from './VideoCard.js'; // VideoCard 컴포넌트 import
+/*import { channels, videos } from '../data/videos.js';
+import { VideoCard } from './VideoCard.js';
 
-/**
- * 구독 페이지를 렌더링합니다.
- */
 export function SubscriptionsPage() {
     let contentHtml = '';
-
-    // 모든 구독 채널 목록과 대표 영상 보여주기
     const subscribedChannelsHtml = channels.map(channel => {
-        // 각 채널의 대표 영상 (여기서는 첫 번째 영상)을 찾습니다.
         const representativeVideo = videos.find(video => video.channel.id === channel.id);
         const videoHtml = representativeVideo ? `
-            <div class="bg-yt-dark rounded-lg overflow-hidden">
-                <img src="${representativeVideo.thumbnail}" alt="${representativeVideo.title}" class="w-full h-36 object-cover">
-                <div class="p-2">
-                    <h4 class="text-white text-sm font-semibold truncate">${representativeVideo.title}</h4>
-                    <p class="text-yt-light-gray text-xs">${representativeVideo.views} 조회수 • ${representativeVideo.uploadDate}</p>
+            <div class="subscription-video-card">
+                <img src="${representativeVideo.thumbnail}" alt="${representativeVideo.title}" class="subscription-video-thumbnail">
+                <div class="subscription-video-info">
+                    <h4 class="subscription-video-title">${representativeVideo.title}</h4>
+                    <p class="subscription-video-meta">${representativeVideo.views} 조회수 • ${representativeVideo.uploadDate}</p>
                 </div>
             </div>
-        ` : `<p class="text-yt-light-gray text-xs text-center py-4">영상이 없습니다.</p>`;
+        ` : `<p class="subscription-no-video">영상이 없습니다.</p>`;
 
         return `
-            <div class="bg-yt-dark rounded-lg p-4 flex flex-col items-center text-center">
-                <img src="${channel.thumbnail}" alt="${channel.name}" class="w-20 h-20 rounded-full mb-3">
-                <h3 class="text-white text-lg font-semibold mb-1">${channel.name}</h3>
-                <p class="text-yt-light-gray text-sm mb-4">구독자 ${channel.subscribers}</p>
-                <div class="w-full">
+            <div class="subscription-channel-card">
+                <img src="${channel.thumbnail}" alt="${channel.name}" class="subscription-channel-thumbnail">
+                <h3 class="subscription-channel-name">${channel.name}</h3>
+                <p class="subscription-channel-subscribers">구독자 ${channel.subscribers}</p>
+                <div class="subscription-video-container">
                     ${videoHtml}
                 </div>
             </div>
@@ -35,9 +28,51 @@ export function SubscriptionsPage() {
     }).join('');
 
     contentHtml = `
-        <div class="p-4">
-            <h2 class="text-2xl font-bold mb-6">구독 중인 채널</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div class="subscriptions-page">
+            <h2 class="subscriptions-page-title">구독 중인 채널</h2>
+            <div class="subscription-grid">
+                ${subscribedChannelsHtml}
+            </div>
+        </div>
+    `;
+
+    return contentHtml;
+}*/
+import { channels, videos } from '../data/videos.js';
+// import { VideoCard } from './VideoCard.js'; // SubscriptionsPage 에서는 필요 없으니 제거
+
+export function SubscriptionsPage() {
+    let contentHtml = '';
+    const subscribedChannelsHtml = channels.map(channel => {
+        // 기존 코드 유지 (대표 영상만 보여줌)
+        const representativeVideo = videos.find(video => video.channelId === channel.id);
+        const videoHtml = representativeVideo ? `
+            <div class="subscription-video-card">
+                <img src="${representativeVideo.thumbnail}" alt="${representativeVideo.title}" class="subscription-video-thumbnail">
+                <div class="subscription-video-info">
+                    <h4 class="subscription-video-title">${representativeVideo.title}</h4>
+                    <p class="subscription-video-meta">${representativeVideo.views} 조회수 • ${representativeVideo.uploadDate}</p>
+                </div>
+            </div>
+        ` : `<p class="subscription-no-video">영상이 없습니다.</p>`;
+
+        // 수정된 부분: 채널 카드를 클릭하면 'channel' 페이지로 이동하도록 data-page와 data-channel-id 추가
+        return `
+            <a href="#" class="subscription-channel-card" data-page="channel" data-channel-id="${channel.id}">
+                <img src="${channel.thumbnail}" alt="${channel.name}" class="subscription-channel-thumbnail">
+                <h3 class="subscription-channel-name">${channel.name}</h3>
+                <p class="subscription-channel-subscribers">구독자 ${channel.subscribers || '0명'}</p>
+                <div class="subscription-video-container">
+                    ${videoHtml}
+                </div>
+            </a>
+        `;
+    }).join('');
+
+    contentHtml = `
+        <div class="subscriptions-page">
+            <h2 class="subscriptions-page-title">구독 중인 채널</h2>
+            <div class="subscription-grid">
                 ${subscribedChannelsHtml}
             </div>
         </div>

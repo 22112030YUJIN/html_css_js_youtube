@@ -1,0 +1,71 @@
+.video-grid-container {
+    padding: 16px;
+}
+
+@media (min-width: 640px) {
+    .video-grid-container {
+        padding: 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .video-grid-container {
+        padding: 32px;
+    }
+}
+
+.category-pills-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.category-pill {
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.category-pill {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.category-pill:hover {
+    background-color: #4c4c4c;
+}
+
+.category-pill.active {
+    background-color: white;
+    color: black;
+}
+
+.video-grid-main {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .video-grid-main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .video-grid-main {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .video-grid-main {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

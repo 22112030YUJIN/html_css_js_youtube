@@ -8,6 +8,7 @@ import { SubscriptionsPage } from '../components/SubscriptionsPage.js';
 import { LibraryPage } from '../components/LibraryPage.js';
 import { VideoDetail } from '../components/VideoDetail.js';
 import { videos } from '../data/videos.js';
+import { ChannelVideosPage } from '../components/ChannelVideosPage.js';
 
 
 const headerContainer = document.getElementById('header-container');
@@ -103,12 +104,15 @@ function attachSubscriptionPageChannelCardListeners() {
  * @param {Event} e
  */
 
+// index.js (수정 후)
 function handleSubscriptionPageChannelCardClick(e) {
-    const targetChannelCard = e.target.closest('.channel-card');
+    // 기존 '.channel-card'를 '.subscription-channel-card'로 변경
+    const targetChannelCard = e.target.closest('.subscription-channel-card');
     if (targetChannelCard) {
         e.preventDefault();
         const channelId = targetChannelCard.dataset.channelId;
         if (channelId) {
+            // 'subscriptions' 페이지에서 'specificChannel' 모드로 이동
             renderPage('subscriptions', { viewMode: 'specificChannel', channelId: channelId });
         }
     }
@@ -141,7 +145,7 @@ function renderPage(pageName, params = {}) {
             mainContentContainer.classList.remove('hidden');
             break;
 
-        case 'subscriptions':
+        /*case 'subscriptions':
             mainContentContainer.innerHTML = SubscriptionsPage({
                 viewMode: params.viewMode,
                 selectedChannelId: params.channelId
@@ -149,6 +153,18 @@ function renderPage(pageName, params = {}) {
             });
             mainContentContainer.classList.remove('hidden');
             attachSubscriptionPageChannelCardListeners();
+            break;*/
+            case 'subscriptions':
+            // SubscriptionsPage는 `viewMode`와 `selectedChannelId`에 따라
+            // 전체 목록을 보여주거나, 개별 채널의 영상 목록을 보여주도록 로직을 추가해야 함
+            mainContentContainer.innerHTML = SubscriptionsPage(params);
+            mainContentContainer.classList.remove('hidden');
+            attachSubscriptionPageChannelCardListeners();
+            break;
+        case 'channel': // 'channel' 케이스 추가
+            // channelId를 받아서 해당 채널의 영상 목록을 렌더링
+            mainContentContainer.innerHTML = ChannelVideosPage(params.channelId);
+            mainContentContainer.classList.remove('hidden');
             break;
 
         case 'library':
@@ -174,6 +190,16 @@ function renderPage(pageName, params = {}) {
 document.addEventListener('DOMContentLoaded', () => {
     headerContainer.innerHTML = Header();
     sidebarContainer.innerHTML = Sidebar();
+    renderPage('home');
+
+    const logo = document.getElementById('logo');
+    if (logo) {
+        logo.addEventListener('click', (e) => {
+            e.preventDefault();
+            renderPage('home');
+        });
+    }
+
     renderPage('home');
 
     const hamburgerBtn = document.getElementById('hamburger');
@@ -234,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.addEventListener('click', (e) => {
         const item = e.target.closest('.sidebar-item');
+        const channelCard = e.target.closest('.subscription-channel-card');
         if (item) {
             e.preventDefault();
             const page = item.dataset.page;
@@ -241,12 +268,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 사이드바의 '구독' 버튼을 클릭하면 전체 목록 페이지로 이동
             if (page === 'subscriptions' && !channelId) {
-                renderPage('subscriptions', { viewMode: 'allChannels' });
+                renderPage('subscriptions');
+                //renderPage('subscriptions', { viewMode: 'allChannels' });
             } else {
                 renderPage(page, { channelId: channelId });
 
             }
         }
+            if (channelCard) {
+        e.preventDefault();
+        const channelId = channelCard.dataset.channelId;
+        // 'channel' 페이지로 직접 이동
+        renderPage('channel', { channelId: channelId }); 
+    }
+
 
     });
 
