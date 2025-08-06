@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone - Dark Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'yt-black': '#0f0f0f',
+                        'yt-dark': '#212121',
+                        'yt-gray': '#3f3f3f',
+                        'yt-light-gray': '#717171',
+                        'yt-red': '#ff0000'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* 헤더 높이만큼 상단 패딩 */
+            padding-top: 56px;
+            /* 사이드바 너비만큼 왼쪽 패딩 (초기 상태) */
+            padding-left: 15rem; /* 60px = 15rem */
+            transition: padding-left 0.3s ease-in-out; /* 패딩 애니메이션 */
+        }
+        /* 사이드바가 닫혔을 때 body의 패딩 조정 (js/main.js에서 제어) */
+        body.sidebar-closed {
+            padding-left: 0;
+        }
+
+        /* 스크롤바 숨김 */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-yt-black text-white font-sans">
+
+    <div id="header-container"></div>
+
+    <div class="flex h-screen overflow-hidden">
+        <div id="sidebar-container"></div>
+        <div id="main-content-container" class="flex-1 overflow-y-auto"></div>
+        <div id="search-results-container" class="hidden flex-1 overflow-y-auto"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
